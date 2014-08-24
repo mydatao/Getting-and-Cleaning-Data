@@ -1,0 +1,48 @@
+Course Project Code Book
+========================
+
+Source of the original data Set: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+Original description inproject: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+The attached R script (run_analysis.R) clean up the data:
+
+* 1. Merges the training and test sets to create one data set, namely train/X_train.txt with test/X_test.txt, the
+result of which is a 10299x561 data frame, with a Number of Instances of 10299, and Number of Attributes: 561, 
+the result is a data frame of 10299 x 1 with subject IDs, and the file train/y_train.txt with test/y_test.txt,
+the result is a data frame of 10299 x 1 with activity IDs.
+
+* 2. Reads features.txt and extracts only the measurements on the mean and standard deviation for each measurement.
+The result is a 10299x66 data frame, only 66 out of 561 attributes are measurements on the mean and standard deviation.
+All measurements are floating point numbers in the range of -1, and 1.
+
+* 3. Reads activity_labels.txt and applies descriptive activity names to name the activities in the data set:
+
+walking
+walkingupstairs
+walkingdownstairs
+sitting
+standing
+laying
+
+* 4. The script labels the data set with descriptive names: all feature names (attributes) and activity names are converted
+to lower case, underscores and brackets () are removed. Then it generate a data frame of 10299x66 containing features 
+with 10299x1 data frames containing activity labels and subject IDs. 
+The result is saved as merged_clean_data.txt, with a data frame of  10299x68 whre the first column contains subject IDs, the second
+column activity names, and the last 66 columns are measurements. The subject IDs are integers between 1 and 30.
+The names of the attributes looks like to the following:
+
+tbodyacc-mean-x
+tbodyacc-mean-y
+tbodyacc-mean-z
+tbodyacc-std-x
+tbodyacc-std-y
+tbodyacc-std-z
+tgravityacc-mean-x
+tgravityacc-mean-y
+
+* 5. The script creates a tidy data set with the average of each measurement for each
+for each subject. The result is saved as data_set_with_the_averages.txt, with a data frame of 180x68,
+where the first column contains subject IDs, the second column contains activity names, and then the
+averages for each of the 66 attributes are in columns 3 to 68. There are 30 subjects and 6 activities, with 180 rows
+in this data set with averages.
